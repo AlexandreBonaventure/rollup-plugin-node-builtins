@@ -63,6 +63,7 @@ var index = function (opts) {
     setup: function setup(build) {
       build.onResolve({ filter: /.*/ }, function (args) {
         var path$$1 = void 0;
+        var importee = args.path;
         if (libs.has(importee)) {
           path$$1 = libs.get(importee);
         }

@@ -61,6 +61,7 @@ export default function (opts) {
     setup (build) {
       build.onResolve({ filter: /.*/ }, args => {
         let path
+        const importee = args.path
         if (libs.has(importee)) {
           path = libs.get(importee);
         }
