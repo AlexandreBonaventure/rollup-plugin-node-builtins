@@ -71,7 +71,7 @@ export default function (opts) {
         if (importee === 'fs') {
           path = fsPath;
         }
-        return { path }
+        return path && { path }
       });
     },
   }

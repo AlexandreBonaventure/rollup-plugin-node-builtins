@@ -71,7 +71,7 @@ var index = function (opts) {
         if (importee === 'fs') {
           path$$1 = fsPath;
         }
-        return { path: path$$1 };
+        return path$$1 && { path: path$$1 };
       });
     }
   };
