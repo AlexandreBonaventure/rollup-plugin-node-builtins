@@ -56,18 +56,22 @@ export default function (opts) {
   if (opts.fs) {
     fsPath = FS_PATH;
   }
-  return {resolveId(importee) {
-    if (importee && importee.slice(-1) === '/') {
-      importee === importee.slice(0, -1);
-    }
-    if (libs.has(importee)) {
-      return libs.get(importee);
-    }
-    if (importee === 'crypto') {
-      return cryptoPath;
-    }
-    if (importee === 'fs') {
-      return fsPath;
-    }
-  }};
+  return {
+    name: 'node-builtin',
+    setup (build) {
+      build.onResolve({ filter: /.*/ }, args => {
+        let path
+        if (libs.has(importee)) {
+          path = libs.get(importee);
+        }
+        if (importee === 'crypto') {
+          path = cryptoPath;
+        }
+        if (importee === 'fs') {
+          path = fsPath;
+        }
+        return { path }
+      });
+    },
+  }
 }
